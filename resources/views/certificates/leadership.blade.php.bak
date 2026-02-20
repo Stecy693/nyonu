@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{{ $certificate_name }}</title>
+    <style>
+        @page { margin: 0; }
+        body {
+            margin: 0;
+            font-family: DejaVu Sans, Arial, sans-serif;
+            background: #f5f0f8;
+        }
+        .sheet {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 36px;
+            background: linear-gradient(135deg, #fff 0%, #fff 70%, #f9eefe 100%);
+            border: 10px solid #e8d4ef;
+            position: relative;
+        }
+        .title {
+            text-align: center;
+            font-size: 34px;
+            letter-spacing: 6px;
+            color: #7b1d85;
+            margin: 20px 0 8px;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #4d4d4d;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        .logo-wrap {
+            text-align: center;
+            margin-top: 6px;
+        }
+        .logo {
+            height: 56px;
+        }
+        .name {
+            text-align: center;
+            margin: 22px 0 8px;
+            font-size: 38px;
+            color: #1f1f1f;
+            font-style: italic;
+        }
+        .text {
+            text-align: center;
+            color: #3b3b3b;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0 auto;
+            max-width: 760px;
+        }
+        .badge {
+            margin: 24px auto 0;
+            text-align: center;
+        }
+        .badge-pill {
+            display: inline-block;
+            border: 1px solid #ba06bf;
+            color: #760e79;
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+            background: #fff;
+        }
+        .meta {
+            width: 100%;
+            margin-top: 32px;
+            font-size: 14px;
+            color: #202020;
+        }
+        .meta td {
+            width: 33.333%;
+            text-align: center;
+            vertical-align: top;
+            padding-top: 10px;
+        }
+        .meta .label {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .cert-name {
+            text-align: center;
+            font-size: 15px;
+            margin-top: 16px;
+            color: #4b4b4b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet">
+        <div class="logo-wrap">
+            @if(!empty($logo_data_uri))
+                <img src="{{ asset('images/Nyonu-Logo.png') }}" alt="Logo Nyonu" class="logo">
+            @else
+                <div style="font-size:20px; font-weight:700; color:#7b1d85;">NYONU</div>
+            @endif
+        </div>
+
+        <div class="title">CERTIFICAT</div>
+        <div class="subtitle">DE LEADERSHIP</div>
+        <div class="cert-name">{{ $certificate_name }}</div>
+
+        <div class="name">{{ $first_name }} {{ $last_name }}</div>
+
+        <p class="text">
+            Ce certificat atteste que <strong>{{ $first_name }} {{ $last_name }}</strong>
+            incarne un <strong>{{ $leadership_type }}</strong> dans le cadre du parcours Nyonu.
+        </p>
+
+        <div class="badge">
+            <span class="badge-pill">{{ $badge_label }}</span>
+        </div>
+
+        <table class="meta" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <span class="label">Type dominant</span>
+                    {{ $leadership_short_type }}
+                </td>
+                <td>
+                    <span class="label">Date</span>
+                    {{ $date }}
+                </td>
+                <td>
+                    <span class="label">Reference</span>
+                    {{ $reference }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
