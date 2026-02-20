@@ -1,33 +1,24 @@
-# Utiliser PHP CLI officiel
+# Base image PHP
 FROM php:8.1-cli
 
-# Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Installer packages système + extensions PHP nécessaires
+# Installer packages système et extensions PHP nécessaires
 RUN apt-get update && apt-get install -y \
     git unzip libicu-dev libpng-dev libzip-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install bcmath exif intl mbstring pdo_pgsql zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install bcmath exif intl mbstring pdo_mysql zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Installer Composer depuis l'image officielle
+# Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copier uniquement les fichiers Composer
+# Copier seulement composer.json et composer.lock pour installer les dépendances
 COPY composer.json composer.lock ./
-
-# Copier le .env pour que Laravel trouve APP_KEY pendant l'installation
-COPY .env . 
-
-# Installer les dépendances PHP
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Copier le reste du projet
+# Copier le reste du projet (sans .env)
 COPY . .
-
-# Donner les permissions correctes à storage et bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Exposer le port dynamique fourni par Render
 EXPOSE ${PORT:-8000}
