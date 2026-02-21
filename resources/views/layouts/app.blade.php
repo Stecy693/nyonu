@@ -15,7 +15,7 @@
     {{-- Header --}}
    <header id="main-header" 
   class="relative top-0 left-0 w-full flex justify-between items-center 
-         px-6 sm:px-10 lg:px-20 pt-10 pb-10 bg-white/90 backdrop-blur-md z-50 
+         px-6 sm:px-10 lg:px-20 py-20 bg-white/90 backdrop-blur-md z-50 
          transition-all duration-300 shadow-none 
          border-b border-gray-200">
 
