@@ -6,7 +6,7 @@
     <title>@yield('title', 'Nyɔnu')</title>
     <link rel="preload" as="image" href="{{ asset('images/Background1.png') }}" fetchpriority="high">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+     <link rel="shortcut icon" href="{{ asset('images/nyonu_fav.ico') }}">
 
 
 </head>
