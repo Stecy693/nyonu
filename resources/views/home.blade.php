@@ -28,7 +28,7 @@
             {{-- Bouton d'inscription --}}
            <div class="mt-6">
                 <a href="#leadership" class="inline-flex items-center bg-[#ba06bf] text-white px-5 sm:px-6 py-3 rounded-full hover:bg-[#760e79] transition text-xl">
-                    Commencer mon parcours
+                    En savoir plus
                     <i data-lucide="chevron-right" class="ml-2 w-5 h-5"></i>
                 </a>
            </div>
