@@ -201,7 +201,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Angélique Kidjo</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Ambassadrice culturelle et voix africaine de portée mondiale</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Ambassadrice culturelle et voix africaine de portée mondiale</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/Ang%C3%A9lique_Kidjo" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
@@ -226,7 +226,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Tassi Hangbè</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Figure historique du pouvoir féminin et du leadership traditionnel</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Figure historique du pouvoir féminin et du leadership traditionnel</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/Tassin_Hangb%C3%A8" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
@@ -251,7 +251,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Marie-Élise Gbèdo</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Juriste engagée pour la justice, la paix et les droits humains</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Juriste engagée pour la justice, la paix et les droits humains</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/Marie-%C3%89lise_Gb%C3%A8do" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
@@ -278,7 +278,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Aurélie Adam Soulé</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Figure du leadership numérique et de l’innovation publique</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Figure du leadership numérique et de l’innovation publique</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/Aur%C3%A9lie_Adam_Soul%C3%A9" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
@@ -303,7 +303,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Claude Borna</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Leadership économique & transformation publique</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Leadership économique & transformation publique</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/Claude_Borna" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
@@ -328,7 +328,7 @@
                         <div class="px-6 pb-7 pt-2 flex-1 flex flex-col">
                             <div class="h-1 w-16 bg-[#ba06bf] rounded-full mx-auto mb-4"></div>
                             <h3 class="text-2xl text-center font-semibold text-black">Noëlie Yarigo</h3>
-                            <p class="text-xl text-gray-600 text-center min-h-[3.5rem]">Athlète d’élite et modèle de leadership par l’excellence sportive</p>
+                            <p class="text-base text-gray-600 text-center min-h-[3.5rem]">Athlète d’élite et modèle de leadership par l’excellence sportive</p>
                             <div class="mt-4 flex justify-center mt-auto">
                                 <a href="https://fr.wikipedia.org/wiki/No%C3%A9lie_Yarigo" class="inline-flex items-center text-[#ba06bf] border border-[#ba06bf] px-4 py-2 rounded-full hover:bg-[#ba06bf] hover:text-white transition">
                                     En savoir plus
