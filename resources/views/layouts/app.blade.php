@@ -1,12 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Nyɔnu')</title>
     <link rel="preload" as="image" href="{{ asset('images/Background1.png') }}" fetchpriority="high">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-     <link rel="shortcut icon" href="{{ asset('images/nyonu_fav.ico') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
+  
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/nyonu_fav.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/nyonu_fav.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/nyonu_fav.ico') }}">
 
 
 </head>
@@ -226,8 +230,30 @@
                 .replace(/'/g, "&#39;");
         }
 
-        const LEADERSHIP_API_URL = window.LEADERSHIP_API_URL || @json(url('/api/leadership/synthesis'));
-        const LEADERSHIP_CERTIFICATE_BASE = window.LEADERSHIP_CERTIFICATE_BASE || @json(url('/api/leadership/synthesis'));
+        function normalizeApiUrl(value, fallbackPath) {
+            const raw = (value || "").toString().trim();
+            const safeFallback = fallbackPath || "/api/leadership/synthesis";
+            if (!raw) return safeFallback;
+            if (raw.startsWith("/")) return raw;
+
+            try {
+                const parsed = new URL(raw, window.location.origin);
+                // Prevent mixed-content calls in production when an http URL is injected.
+                if (window.location.protocol === "https:" && parsed.protocol === "http:") {
+                    parsed.protocol = "https:";
+                }
+                if (parsed.origin === window.location.origin) {
+                    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+                }
+                return parsed.toString();
+            } catch (e) {
+                return safeFallback;
+            }
+        }
+
+        const LEADERSHIP_API_URL = normalizeApiUrl(window.LEADERSHIP_API_URL, "/api/leadership/synthesis");
+        const LEADERSHIP_CERTIFICATE_BASE = normalizeApiUrl(window.LEADERSHIP_CERTIFICATE_BASE, "/api/leadership/synthesis");
+        window.LEADERSHIP_API_URL = LEADERSHIP_API_URL;
         window.LEADERSHIP_CERTIFICATE_BASE = LEADERSHIP_CERTIFICATE_BASE;
         const submitDefaultText = quizNext2 ? quizNext2.textContent.trim() : "Soumettre";
         let lastGeneratedSignature = null;
@@ -497,7 +523,11 @@
                 const bestKey = getBestProfile(scores) || "kidjo";
                 const profileData = profiles[bestKey] || null;
                 const fallbackSummary = generateResultText(name, profileData);
-                const technicalReason = error && error.message ? ` Détail: ${error.message}` : "";
+                const technicalMessage = error && error.message ? error.message : "";
+                const networkHint = technicalMessage === "Failed to fetch"
+                    ? ` URL: ${LEADERSHIP_API_URL} | Origine: ${window.location.origin} | En ligne: ${navigator.onLine ? "oui" : "non"}`
+                    : "";
+                const technicalReason = technicalMessage ? ` Détail: ${technicalMessage}${networkHint}` : "";
 
                 setResultHtml(formatSynthesisForDisplay(`${fallbackSummary}\n\n(Mode hors ligne: le service de synthèse est temporairement indisponible.${technicalReason})`));
                 lastGeneratedSignature = signature;
