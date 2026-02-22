@@ -472,21 +472,6 @@
             }
             const response = await fetch(LEADERSHIP_API_URL, { ... });
 
-const rawText = await response.text();
-let data = {};
-try { data = rawText ? JSON.parse(rawText) : {}; } catch (_) {}
-
-if (!response.ok) {
-    const serverMessage = [
-        data.message,
-        data.error,
-        data.details,
-        rawText && !Object.keys(data).length ? rawText : ""
-    ].filter(Boolean).join(" | ");
-
-    throw new Error(serverMessage || `HTTP ${response.status}`);
-}
-
 
             setSubmitLoading(true);
             quizResult.classList.remove("hidden");
