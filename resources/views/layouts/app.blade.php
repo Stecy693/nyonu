@@ -507,11 +507,25 @@
             });
 
 
-                const data = await response.json().catch(() => ({}));
-                if (!response.ok) {
-                    const serverMessage = [data.error, data.details].filter(Boolean).join(" - ");
-                    throw new Error(serverMessage || "Erreur serveur pendant la génération.");
-                }
+                const rawText = await response.text();
+                    let data = {};
+                    try {
+                        data = rawText ? JSON.parse(rawText) : {};
+                    } catch (_) {
+                        data = {};
+                    }
+                    
+                    if (!response.ok) {
+                        const serverMessage = [
+                            data.message,
+                            data.error,
+                            data.details,
+                            (!data.message && !data.error && !data.details) ? rawText : ""
+                        ].filter(Boolean).join(" | ");
+                    
+                        throw new Error(serverMessage || `HTTP ${response.status}`);
+                    }
+
 
                 const synthesis = typeof data.synthesis === "string" ? data.synthesis.trim() : "";
                 if (!synthesis) {
