@@ -488,7 +488,6 @@
                     education_level: educationLabel,
                     answers
                 })
-                const response = await fetch(LEADERSHIP_API_URL, { ... });
 
                 const rawText = await response.text();
                 let data = {};
