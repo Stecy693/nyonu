@@ -461,39 +461,35 @@
 
         showQuizStep(0);
 
-        async function submitLeadershipSynthesis() {
-            const quizContext = getQuizContext();
-            const { firstname, lastname, age, name, description, education, educationLabel, answers, signature } = quizContext;
-
-            if (!firstname || !name || !description || !education || answers.length === 0) {
-                setResultText("Merci de renseigner ton prénom et ton nom, ton niveau d'étude, au moins une information de profil et de cocher au moins une réponse.");
-                quizResult.classList.remove("hidden");
-                return;
-            }
-            const response = await fetch(LEADERSHIP_API_URL, { ... });
-
-
-            setSubmitLoading(true);
+       async function submitLeadershipSynthesis() {
+        const quizContext = getQuizContext();
+        const { firstname, lastname, age, name, description, education, educationLabel, answers, signature } = quizContext;
+    
+        if (!firstname || !name || !description || !education || answers.length === 0) {
+            setResultText("Merci de renseigner ton prénom et ton nom, ton niveau d'étude, au moins une information de profil et de cocher au moins une réponse.");
             quizResult.classList.remove("hidden");
-            setResultText("Génération en cours...");
+            return;
+        }
+    
+        setSubmitLoading(true);
+        quizResult.classList.remove("hidden");
+        setResultText("Génération en cours...");
+    
+        try {
+            const response = await fetch(LEADERSHIP_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    first_name: firstname,
+                    last_name: lastname,
+                    age,
+                    name,
+                    description,
+                    education_level: educationLabel,
+                    answers
+                })
+            });
 
-            try {
-                
-                const response = await fetch(LEADERSHIP_API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        first_name: firstname,
-                        last_name: lastname,
-                        age,
-                        name,
-                        description,
-                        education_level: educationLabel,
-                        answers
-                    })
-                });
 
                 const data = await response.json().catch(() => ({}));
                 if (!response.ok) {
