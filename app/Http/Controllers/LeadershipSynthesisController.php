@@ -95,21 +95,35 @@ class LeadershipSynthesisController extends Controller
 
         $cleanSynthesis = $this->sanitizeSynthesis($synthesis);
 
-        $profile = MiniExperienceProfile::create([
-            'first_name' => (string) $validated['first_name'],
-            'last_name' => (string) ($validated['last_name'] ?? ''),
-            'full_name' => (string) $validated['name'],
-            'age' => isset($validated['age']) ? (int) $validated['age'] : null,
-            'description' => (string) $validated['description'],
-            'education_level' => (string) ($validated['education_level'] ?? ''),
-            'checked_assertions' => array_values($validated['answers']),
-        ]);
+       $cleanSynthesis = $this->sanitizeSynthesis($synthesis);
 
-        $synthesis = LeadershipSynthesis::create([
-            'profile_id' => $profile->id,
-            'synthesis_text' => $cleanSynthesis,
-            'certificate_token' => Str::random(40),
-        ]);
+        try {
+            $profile = MiniExperienceProfile::create([
+                'first_name' => (string) $validated['first_name'],
+                'last_name' => (string) ($validated['last_name'] ?? ''),
+                'full_name' => (string) $validated['name'],
+                'age' => isset($validated['age']) ? (int) $validated['age'] : null,
+                'description' => (string) $validated['description'],
+                'education_level' => (string) ($validated['education_level'] ?? ''),
+                'checked_assertions' => array_values($validated['answers']),
+            ]);
+        
+            $synthesis = LeadershipSynthesis::create([
+                'profile_id' => $profile->id,
+                'synthesis_text' => $cleanSynthesis,
+                'certificate_token' => Str::random(40),
+            ]);
+        } catch (Throwable $exception) {
+            Log::error('Synthesis save failed', [
+                'message' => $exception->getMessage(),
+            ]);
+        
+            return response()->json([
+                'error' => 'Echec sauvegarde synthese.',
+                'details' => $exception->getMessage(),
+            ], 500);
+        }
+
 
         return response()->json([
             'synthesis' => $cleanSynthesis,
