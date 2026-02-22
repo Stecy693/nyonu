@@ -461,76 +461,59 @@
 
         showQuizStep(0);
 
-       async function submitLeadershipSynthesis() {
-        const quizContext = getQuizContext();
-        const { firstname, lastname, age, name, description, education, educationLabel, answers, signature } = quizContext;
-    
-        if (!firstname || !name || !description || !education || answers.length === 0) {
-            setResultText("Merci de renseigner ton prénom et ton nom, ton niveau d'étude, au moins une information de profil et de cocher au moins une réponse.");
+        async function submitLeadershipSynthesis() {
+            const quizContext = getQuizContext();
+            const { firstname, lastname, age, name, description, education, educationLabel, answers, signature } = quizContext;
+        
+            if (!firstname || !name || !description || !education || answers.length === 0) {
+                setResultText("Merci de renseigner ton prénom et ton nom, ton niveau d'étude, au moins une information de profil et de cocher au moins une réponse.");
+                quizResult.classList.remove("hidden");
+                return;
+            }
+        
+            setSubmitLoading(true);
             quizResult.classList.remove("hidden");
-            return;
-        }
-    
-        setSubmitLoading(true);
-        quizResult.classList.remove("hidden");
-        setResultText("Génération en cours...");
-    
-        try {
-            const response = await fetch(LEADERSHIP_API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    first_name: firstname,
-                    last_name: lastname,
-                    age,
-                    name,
-                    description,
-                    education_level: educationLabel,
-                    answers
-                })
-
+            setResultText("Génération en cours...");
+        
+            try {
+                const response = await fetch(LEADERSHIP_API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        first_name: firstname,
+                        last_name: lastname,
+                        age,
+                        name,
+                        description,
+                        education_level: educationLabel,
+                        answers
+                    })
+                });
+        
                 const rawText = await response.text();
                 let data = {};
-                try { data = rawText ? JSON.parse(rawText) : {}; } catch (_) {}
-                
+                try {
+                    data = rawText ? JSON.parse(rawText) : {};
+                } catch (_) {
+                    data = {};
+                }
+        
                 if (!response.ok) {
                     const serverMessage = [
                         data.message,
                         data.error,
                         data.details,
-                        rawText
+                        (!data.message && !data.error && !data.details) ? rawText : ""
                     ].filter(Boolean).join(" | ");
+        
                     throw new Error(serverMessage || `HTTP ${response.status}`);
                 }
-
-            });
-
-
-                const rawText = await response.text();
-                    let data = {};
-                    try {
-                        data = rawText ? JSON.parse(rawText) : {};
-                    } catch (_) {
-                        data = {};
-                    }
-                    
-                    if (!response.ok) {
-                        const serverMessage = [
-                            data.message,
-                            data.error,
-                            data.details,
-                            (!data.message && !data.error && !data.details) ? rawText : ""
-                        ].filter(Boolean).join(" | ");
-                    
-                        throw new Error(serverMessage || `HTTP ${response.status}`);
-                    }
-
-
+        
                 const synthesis = typeof data.synthesis === "string" ? data.synthesis.trim() : "";
                 if (!synthesis) {
                     throw new Error("La synthèse reçue est vide.");
                 }
-
+        
                 setResultHtml(formatSynthesisForDisplay(synthesis));
                 window.LAST_LEADERSHIP_ASSESSMENT = {
                     id: data.assessment_id || null,
@@ -541,7 +524,6 @@
                 }
                 lastGeneratedSignature = signature;
             } catch (error) {
-                // Fallback local pour ne jamais bloquer l'utilisatrice.
                 const scores = calculateScores(quizChoices);
                 const bestKey = getBestProfile(scores) || "kidjo";
                 const profileData = profiles[bestKey] || null;
@@ -551,7 +533,7 @@
                     ? ` URL: ${LEADERSHIP_API_URL} | Origine: ${window.location.origin} | En ligne: ${navigator.onLine ? "oui" : "non"}`
                     : "";
                 const technicalReason = technicalMessage ? ` Détail: ${technicalMessage}${networkHint}` : "";
-
+        
                 setResultHtml(formatSynthesisForDisplay(`${fallbackSummary}\n\n(Mode hors ligne: le service de synthèse est temporairement indisponible.${technicalReason})`));
                 lastGeneratedSignature = signature;
             } finally {
@@ -559,6 +541,7 @@
                 quizResult.classList.remove("hidden");
             }
         }
+
 
         if (quizNext2) {
             quizNext2.addEventListener("click", async function () {
