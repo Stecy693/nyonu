@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Nyɔnu')</title>
-    <link rel="preload" as="image" href="{{ asset('images/Background1.png') }}" fetchpriority="high">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/nyonu_fav.ico') }}">
+    <link rel="preload" as="image" href="{{ secure_asset('images/Background1.png') }}" fetchpriority="high">
+    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+    <link rel="shortcut icon" href="{{ secure_asset('images/nyonu_fav.ico') }}">
 
 
 </head>
@@ -20,7 +20,7 @@
          border-b border-gray-200">
 
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/Nyonu-Logo.png') }}" alt="Nyɔnu logo" class="w-auto h-12 sm:h-14 lg:h-16">
+            <img src="{{ secure_asset('images/Nyonu-Logo.png') }}" alt="Nyɔnu logo" class="w-auto h-12 sm:h-14 lg:h-16">
         </div>
             <nav class="hidden lg:flex space-x-6 text-xl items-center">
                 <a href="#leadership" class="text-black hover:text-[#ba06bf]">Le concept</a>
@@ -58,7 +58,7 @@
             <!-- Logo + description -->
             <div>
             <div class="flex items-center gap-2 mb-4">
-                 <img src="{{ asset('images/Nyonu-Logo-white.png') }}" alt="Nyɔnu logo" class="w-auto h-16">
+                 <img src="{{ secure_asset('images/Nyonu-Logo-white.png') }}" alt="Nyɔnu logo" class="w-auto h-16">
             </div>
             <p class="text-white mb-6">
               Nyɔnu t’accompagne pas à pas pour révéler ton potentiel et construire un parcours qui te ressemble.
@@ -106,7 +106,7 @@
 
     
 {{-- Script pour les icônes Lucide --}}
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/lucide@0.575.0/dist/umd/lucide.min.js"></script>
 <script>
     if (window.lucide && typeof window.lucide.createIcons === "function") {
         window.lucide.createIcons();
