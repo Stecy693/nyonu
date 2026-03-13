@@ -91,7 +91,7 @@
 
         <!-- Bas du footer -->
         <div class="border-t border-gray-200 mt-12 pt-6 text-center text-gray-500 text-lg">
-           <p>Design & Développement réalisés par <span class="text-white font-medium">Stécy LAHITAN</span> — © 2025 <span class="text-white font-medium">Nyɔnu</span>.</p>
+           <p>Design & Développement réalisés par <span class="text-white font-medium">Stécy LAHITAN</span> — © 2026 <span class="text-white font-medium">Nyɔnu</span>.</p>
         </div>
     </footer>
 
